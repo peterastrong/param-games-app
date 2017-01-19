@@ -44,4 +44,23 @@ class GamesController < ApplicationController
     @number_of_views = params[:visit].to_i || 1
     render "counter_view.html.erb"
   end 
+  def form_input_method
+    
+    render "form_input.html.erb"
+  end
+
+  def form_result_method
+    @answer = params[:form_message]
+    winning_number = 46
+    if @answer.to_i < 1 || @answer.to_i > 100
+      @message = "please pick a number 1 - 100"
+    elsif @answer.to_i == winning_number
+      @message = "you are the greatest at this game"
+    elsif @answer.to_i > winning_number && @answer.to_i <=100
+      @message = "guess lower"
+    elsif @answer.to_i < winning_number && @answer.to_i >= 1
+      @message = "guess higher"
+    end    
+    render "form_result.html.erb"
+  end
 end
